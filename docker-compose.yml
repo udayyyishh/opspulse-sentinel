@@ -1,0 +1,50 @@
+services:
+  opspulse:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: opspulse-sentinel
+    ports:
+      - "8000:8000"
+    environment:
+      - CONFIG_PATH=/app/config/targets.yaml
+      - POLL_INTERVAL_SECONDS=10
+      - REQUEST_TIMEOUT_SECONDS=4.0
+      - ENABLE_CONSOLE_ALERTS=true
+    volumes:
+      - ./config/targets.yaml:/app/config/targets.yaml:ro
+    depends_on:
+      - demo-service
+    restart: unless-stopped
+    networks:
+      - opspulse-net
+
+  demo-service:
+    image: python:3.12-alpine
+    container_name: opspulse-demo-service
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./scripts/mock_service.py:/app/mock_service.py:ro
+    working_dir: /app
+    command: ["python", "mock_service.py"]
+    restart: unless-stopped
+    networks:
+      - opspulse-net
+
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: opspulse-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - opspulse
+    restart: unless-stopped
+    networks:
+      - opspulse-net
+
+networks:
+  opspulse-net:
+    driver: bridge

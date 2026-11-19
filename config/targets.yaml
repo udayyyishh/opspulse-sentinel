@@ -1,0 +1,32 @@
+# OpsPulse Target Monitoring Configuration
+
+settings:
+  poll_interval_seconds: 15
+  request_timeout_seconds: 5
+  alert_webhook_url: "" # e.g. Slack/Discord webhook or internal incident management API
+  enable_console_alerts: true
+
+targets:
+  - id: "github-status"
+    name: "GitHub API"
+    url: "https://api.github.com"
+    method: "GET"
+    expected_status: 200
+    max_latency_ms: 1200
+    critical: true
+
+  - id: "httpbin-health"
+    name: "HTTPBin Health Probe"
+    url: "https://httpbin.org/status/200"
+    method: "GET"
+    expected_status: 200
+    max_latency_ms: 1500
+    critical: false
+
+  - id: "internal-mock-service"
+    name: "Internal Mock Microservice"
+    url: "http://demo-service:8080/health"
+    method: "GET"
+    expected_status: 200
+    max_latency_ms: 500
+    critical: true

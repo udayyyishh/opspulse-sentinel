@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: opspulse-monitoring
+  labels:
+    app.kubernetes.io/name: opspulse
+    app.kubernetes.io/part-of: devops-observability
