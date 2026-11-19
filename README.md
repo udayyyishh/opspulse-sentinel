@@ -2,7 +2,7 @@
 
 > **A Lightweight Microservice Health & SLA Uptime Sentinel with Automated Alerting, Prometheus Metrics, Multi-Stage Docker, Kubernetes Manifests, and Full CI/CD Pipeline.**
 
-[![CI/CD Pipeline](https://github.com/example/opspulse/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/example/opspulse/actions)
+[![CI/CD Pipeline](https://github.com/udayyyishh/opspulse-sentinel/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/udayyyishh/opspulse-sentinel/actions)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
 [![Kubernetes](https://img.shields.io/badge/k8s-manifests-326CE5.svg)](https://kubernetes.io/)
